@@ -131,6 +131,10 @@ test:
     pullPolicy: IfNotPresent
     tag: "latest"
 
+monitoring:
+  # -- Specifies whether the monitoring should be enabled. Requires Prometheus Operator CRDs.
+  podMonitorEnabled: false
+
 # Default monitoring queries
 monitoringQueriesConfigMap:
   # -- The name of the default monitoring configmap
