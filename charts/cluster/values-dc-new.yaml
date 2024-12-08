@@ -273,17 +273,13 @@ cluster:
   # -- BootstrapInitDB is the configuration of the bootstrap process when initdb is used.
   # See: https://cloudnative-pg.io/documentation/current/bootstrap/
   # See: https://cloudnative-pg.io/documentation/current/cloudnative-pg.v1/#postgresql-cnpg-io-v1-bootstrapinitdb
-  initdb:
-    database: app
-    owner: ""
-    postInitSQL:
-      - CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+  initdb: {}
     # database: app
     # owner: "" # Defaults to the database name
     # secret:
     #   name: "" # Name of the secret containing the initial credentials for the owner of the user database. If empty a new secret will be created from scratch
     # options: []
-    encoding: UTF8
+    # encoding: UTF8
     # postInitSQL:
     #   - CREATE EXTENSION IF NOT EXISTS vector;
     # postInitApplicationSQL: []
