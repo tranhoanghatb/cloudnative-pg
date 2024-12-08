@@ -1,0 +1,76 @@
+nameOverride: "dr-cluster"
+fullnameOverride: "dr-cluster"
+
+type: postgresql
+version:
+  postgresql: "16"
+  timescaledb: "2.15"
+  postgis: "3.4"
+
+mode: replica
+clusterName: "dc-cluster"  # Link to the main DC cluster
+
+# Enable WAL replication from the DC cluster
+recovery:
+  method: wal-archive
+  archiveDirectory: "/var/lib/postgresql/wal_archive"
+  archiveMode: "on"
+  archiveCommand: "cp %p /var/lib/postgresql/wal_archive/%f"
+
+cluster:
+  instances: 3
+  imageName: "postgres:16"
+  imagePullPolicy: IfNotPresent
+  storage:
+    size: 8Gi
+    storageClass: "slow-storage"
+  walStorage:
+    enabled: true
+    size: 2Gi
+    storageClass: "slow-storage"
+  resources:
+    limits:
+      cpu: "1000m"
+      memory: "4Gi"
+    requests:
+      cpu: "1000m"
+      memory: "4Gi"
+  primaryUpdateMethod: restart
+  primaryUpdateStrategy: unsupervised
+  logLevel: "info"
+  affinity:
+    topologyKey: topology.kubernetes.io/zone
+
+# Enable WAL archiving for backups
+backups:
+  enabled: true
+  method: wal-archive
+  archiveDirectory: "/var/lib/postgresql/wal_archive"
+  archiveMode: "on"
+  walArchiveTimeout: "60s"
+  walArchiveMaxSize: "50Gi"  # Optional: set a size limit for the WAL archive
+  retentionPolicy: "30d"
+
+monitoring:
+  enabled: true
+  podMonitor:
+    enabled: true
+    relabelings: []
+  prometheusRule:
+    enabled: true
+    excludeRules: []
+
+postgresql:
+  parameters:
+    max_connections: 500
+    archive_mode: "on"
+    archive_command: "cp %p /var/lib/postgresql/wal_archive/%f"
+    archive_timeout: "60s"
+  pg_hba:
+    - host all all 10.0.0.0/24 md5
+
+initdb: 
+  database: app
+  owner: app_user
+  postInitSQL:
+    - CREATE EXTENSION IF NOT EXISTS pg_stat_statements;

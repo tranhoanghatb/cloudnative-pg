@@ -1,0 +1,19 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStore
+metadata:
+  name: rook-ceph-object-store
+  namespace: rook-ceph
+spec:
+  gateway:
+    type: s3
+    sslCertificateRef: ""
+    port: 80
+    instances: 1
+    placement: {}
+    resources: {}
+  metadataPool:
+    replicated:
+      size: 3
+  dataPool:
+    replicated:
+      size: 3
