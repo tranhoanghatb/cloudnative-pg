@@ -30,7 +30,7 @@ metadata:
 spec:
   store: pg-backup  
   displayName: "Backup User for DC"
-----
+---
 apiVersion: v1
 kind: Secret
 metadata:
