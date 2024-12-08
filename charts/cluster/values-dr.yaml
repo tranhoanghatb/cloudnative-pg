@@ -62,7 +62,7 @@ backups:
   retentionPolicy: "30d"
 
 monitoring:
-  enabled: false
+  enabled: true
   podMonitor:
     enabled: true
     relabelings: []
@@ -70,6 +70,18 @@ monitoring:
     enabled: true
     excludeRules: []
     customQueries: []
+     - name: "pg_cache_hit_ratio"
+       query: "SELECT current_database() as datname, sum(heap_blks_hit) / (sum(heap_blks_hit) + sum(heap_blks_read)) as ratio FROM pg_statio_user_tables;"
+       metrics:
+         - datname:
+             usage: "LABEL"
+             description: "Name of the database"
+         - ratio:
+             usage: GAUGE
+             description: "Cache hit ratio"
+    customQueriesSecret: []
+     - name: custom-queries-secret
+       key: custom-queries
 
 postgresql:
   parameters:
