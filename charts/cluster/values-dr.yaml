@@ -69,7 +69,9 @@ monitoring:
   prometheusRule:
     enabled: true
     excludeRules: []
-
+    customQueries: []
+    customQueriesSecret: []
+    
 postgresql:
   parameters:
     max_connections: 500
