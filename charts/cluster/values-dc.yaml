@@ -50,7 +50,7 @@ backups:
   retentionPolicy: "30d"
 
 monitoring:
-  enabled: true
+  enabled: false
   podMonitor:
     enabled: true
     relabelings: []
