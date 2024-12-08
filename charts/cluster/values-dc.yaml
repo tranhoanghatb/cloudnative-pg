@@ -33,15 +33,17 @@ cluster:
   affinity:
     topologyKey: topology.kubernetes.io/zone
 
-# Enable WAL archiving for backups
 backups:
   enabled: true
-  method: wal-archive
-  archiveDirectory: "/var/lib/postgresql/wal_archive"
-  archiveMode: "on"
-  walArchiveTimeout: "60s"
-  walArchiveMaxSize: "50Gi"  # Optional: set a size limit for the WAL archive
-  retentionPolicy: "30d"
+  provider: s3
+  s3:
+    region: "gds"              
+    endpoint: "http://pg-backup-rook-ceph.rook-ceph.svc.cluster.local:80"  # object store's endpoint
+    bucket: "dc-backups-bucket"     # Object storage bucket name
+    path: "/dc"                     # Path inside the bucket for backups
+    accessKey: "dc-access-key"      # Access key for Rook-Ceph S3 user
+    secretKey: "dc-secret-key"      # Secret key for Rook-Ceph S3 user
+  retentionPolicy: "30d"            # Backup retention policy (e.g., 30 days)
 
 monitoring:
   enabled: true
@@ -55,9 +57,6 @@ monitoring:
 postgresql:
   parameters:
     max_connections: 500
-    archive_mode: "on"
-    archive_command: "cp %p /var/lib/postgresql/wal_archive/%f"
-    archive_timeout: "60s"
   pg_hba:
     - host all all 10.0.0.0/24 md5
 

@@ -10,12 +10,21 @@ version:
 mode: replica
 clusterName: "dc-cluster"  # Link to the main DC cluster
 
-# Enable WAL replication from the DC cluster
 recovery:
-  method: wal-archive
-  archiveDirectory: "/var/lib/postgresql/wal_archive"
-  archiveMode: "on"
-  archiveCommand: "cp %p /var/lib/postgresql/wal_archive/%f"
+  method: backup
+  backupName: "dc-cluster-backup-latest"  # The most recent backup name from DC
+  clusterName: "dc-cluster"              # Name of the DC cluster
+
+  provider: s3
+  s3:
+    region: "gds"                 
+    endpoint: "http://pg-backup-rook-ceph.rook-ceph.svc.cluster.local:80"  # DR object store endpoint
+    bucket: "dc-backups-bucket"         # Object storage bucket name from DC
+    path: "/dc"                         # Path to the backup files inside the bucket
+    accessKey: "dc-access-key"          # Access key for Rook-Ceph S3-compatible user
+    secretKey: "dc-secret-key"          # Secret key for Rook-Ceph S3-compatible user
+  retentionPolicy: "30d"                # Retention policy for backups
+
 
 cluster:
   instances: 3
@@ -41,14 +50,15 @@ cluster:
   affinity:
     topologyKey: topology.kubernetes.io/zone
 
-# Enable WAL archiving for backups
 backups:
   enabled: true
-  method: wal-archive
-  archiveDirectory: "/var/lib/postgresql/wal_archive"
-  archiveMode: "on"
-  walArchiveTimeout: "60s"
-  walArchiveMaxSize: "50Gi"  # Optional: set a size limit for the WAL archive
+  provider: s3
+  s3:
+    region: "us-east-1"
+    bucket: "dr-backups-bucket"
+    path: "/dr"
+    accessKey: "dr-access-key"
+    secretKey: "dr-secret-key"
   retentionPolicy: "30d"
 
 monitoring:
@@ -63,9 +73,6 @@ monitoring:
 postgresql:
   parameters:
     max_connections: 500
-    archive_mode: "on"
-    archive_command: "cp %p /var/lib/postgresql/wal_archive/%f"
-    archive_timeout: "60s"
   pg_hba:
     - host all all 10.0.0.0/24 md5
 

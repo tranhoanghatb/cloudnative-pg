@@ -1,0 +1,8 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: dc-backup-user
+  namespace: rook-ceph
+spec:
+  store: pg-backup  
+  displayName: "Backup User for DC"
