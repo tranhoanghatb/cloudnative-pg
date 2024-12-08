@@ -32,23 +32,6 @@ cluster:
   logLevel: "info"
   affinity:
     topologyKey: topology.kubernetes.io/zone
-
-backups:
-  enabled: true
-  provider: s3
-  s3:
-    region: "us-east-1"
-    endpoint: "http://pg-backup.k8s.local"
-    bucket: "dc-backups-bucket"
-    path: "/dc"
-    secretKeyRef:
-      name: dc-backup-s3-credentials
-      key: secretKey
-    accessKeyRef:
-      name: dc-backup-s3-credentials
-      key: accessKey
-  retentionPolicy: "30d"
-
   monitoring:
     # -- Whether to enable monitoring
     enabled: true
@@ -86,6 +69,23 @@ backups:
     customQueriesSecret: []
      - name: custom-queries-secret
        key: custom-queries
+backups:
+  enabled: true
+  provider: s3
+  s3:
+    region: "us-east-1"
+    endpoint: "http://pg-backup.k8s.local"
+    bucket: "dc-backups-bucket"
+    path: "/dc"
+    secretKeyRef:
+      name: dc-backup-s3-credentials
+      key: secretKey
+    accessKeyRef:
+      name: dc-backup-s3-credentials
+      key: accessKey
+  retentionPolicy: "30d"
+
+
 
 
 postgresql:
