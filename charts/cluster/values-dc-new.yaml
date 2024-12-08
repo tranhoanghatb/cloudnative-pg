@@ -258,10 +258,10 @@ cluster:
 
   postgresql:
     # -- PostgreSQL configuration options (postgresql.conf)
-    parameters: {}
+    parameters:
       max_connections: 300
     # -- PostgreSQL Host Based Authentication rules (lines to be appended to the pg_hba.conf file)
-    pg_hba: []
+    pg_hba:
       - host all all 10.244.0.0/16 md5
     # -- PostgreSQL User Name Maps rules (lines to be appended to the pg_ident.conf file)
     pg_ident: []
