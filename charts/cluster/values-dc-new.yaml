@@ -323,12 +323,8 @@ backups:
     endpoint: "http://pg-backup.k8s.local"
     bucket: "dc-backups-bucket"
     path: "/dc"
-    secretKeyRef:
-      name: dc-backup-s3-credentials
-      key: secretKey
-    accessKeyRef:
-      name: dc-backup-s3-credentials
-      key: accessKey
+    accessKey: "access-key123" 
+    secretKey: "secret-key123" 
   retentionPolicy: "30d"
   azure:
     path: "/"
