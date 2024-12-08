@@ -12,19 +12,19 @@ clusterName: "dc-cluster"  # Link to the main DC cluster
 
 recovery:
   method: backup
-  backupName: "dc-cluster-backup-latest"  # The most recent backup name from DC
-  clusterName: "dc-cluster"              # Name of the DC cluster
-
   provider: s3
   s3:
-    region: "gds"                 
-    endpoint: "http://pg-backup-rook-ceph.rook-ceph.svc.cluster.local:80"  # DR object store endpoint
-    bucket: "dc-backups-bucket"         # Object storage bucket name from DC
-    path: "/dc"                         # Path to the backup files inside the bucket
-    accessKey: "dc-access-key"          # Access key for Rook-Ceph S3-compatible user
-    secretKey: "dc-secret-key"          # Secret key for Rook-Ceph S3-compatible user
-  retentionPolicy: "30d"                # Retention policy for backups
-
+    region: "us-east-1"
+    endpoint: "http://pg-backup.k8s.local"
+    bucket: "dc-backups-bucket"
+    path: "/dc"
+    secretKeyRef:
+      name: dc-backup-s3-credentials
+      key: secretKey
+    accessKeyRef:
+      name: dc-backup-s3-credentials
+      key: accessKey
+  retentionPolicy: "30d"
 
 cluster:
   instances: 3

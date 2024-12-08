@@ -20,3 +20,58 @@ spec:
     port: 80
     # securePort: 443
     instances: 1
+---
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: dc-backup-user
+  namespace: rook-ceph
+spec:
+  store: pg-backup  
+  displayName: "Backup User for DC"
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dc-backup-s3-credentials
+  namespace: rook-ceph
+type: Opaque
+data:
+  accessKey: cGdhZG1pbg==
+  secretKey: cGdwYXNzd29yZA==
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rook-ceph-rgw-pg-backup
+  namespace: rook-ceph
+spec:
+  type: LoadBalancer
+  selector:
+    app: rook-ceph-rgw
+  ports:
+    - protocol: TCP
+      port: 80        
+      targetPort: 80  
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pg-backup-ingress
+  namespace: rook-ceph
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - host: pg-backup.k8s.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rook-ceph-rgw-pg-backup  #  Service Rook Ceph Object Store
+            port:
+              number: 80
+
