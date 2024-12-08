@@ -1,7 +1,7 @@
 # -- Override the name of the chart
-nameOverride: "dc-cluster"
+nameOverride: ""
 # -- Override the full name of the chart
-fullnameOverride: "dc-cluster"
+fullnameOverride: ""
 
 ###
 # -- Type of the CNPG database. Available types:
@@ -258,11 +258,11 @@ cluster:
 
   postgresql:
     # -- PostgreSQL configuration options (postgresql.conf)
-    parameters:
-      max_connections: "300"
+    parameters: {}
+      # max_connections: 300
     # -- PostgreSQL Host Based Authentication rules (lines to be appended to the pg_hba.conf file)
-    pg_hba:
-      - host all all 10.244.0.0/16 md5
+    pg_hba: []
+      # - host all all 10.244.0.0/16 md5
     # -- PostgreSQL User Name Maps rules (lines to be appended to the pg_ident.conf file)
     pg_ident: []
       # - mymap   /^(.*)@mydomain\.com$      \1
@@ -294,7 +294,7 @@ cluster:
 
 backups:
   # -- You need to configure backups manually, so backups are disabled by default.
-  enabled: true
+  enabled: false
 
   # -- Overrides the provider specific default endpoint. Defaults to:
   # S3: https://s3.<region>.amazonaws.com"
@@ -315,13 +315,11 @@ backups:
   # -- One of `s3`, `azure` or `google`
   provider: s3
   s3:
-    region: "us-east-1"
-    endpoint: "http://pg-backup.k8s.local"
-    bucket: "dc-backups-bucket"
-    path: "/dc"
-    accessKey: "access-key123" 
-    secretKey: "secret-key123" 
-  retentionPolicy: "30d"
+    region: ""
+    bucket: ""
+    path: "/"
+    accessKey: ""
+    secretKey: ""
   azure:
     path: "/"
     connectionString: ""
