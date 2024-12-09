@@ -1,0 +1,17 @@
+apiVersion: cnpg.io/v1
+kind: Backup
+metadata:
+  name: dc-cluster-manual-backup
+  namespace: postgresdc
+spec:
+  cluster: dc-cluster                            # Name of your PostgreSQL cluster
+  target:
+    barmanObjectStore:
+      destinationPath: s3://dc-backups-bucket/dc # S3 bucket and path
+      s3Credentials:
+        accessKeyId:
+          value: "access-key123"                 # S3 access key
+        secretAccessKey:
+          value: "secret-key123"                 # S3 secret key
+      s3Endpoint: "http://pg-backup.k8s.local"   # S3 endpoint
+      s3Region: "us-east-1"                      # S3 region
