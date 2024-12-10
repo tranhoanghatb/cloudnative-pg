@@ -49,16 +49,16 @@ metadata:
 spec:
   store: pg-backup  
   displayName: "Backup User for DC"
-# ---
-# apiVersion: v1
-# kind: Secret
-# metadata:
-#   name: dc-backup-s3-credentials
-#   namespace: rook-ceph
-# type: Opaque
-# data:
-#   accessKey: cGdhZG1pbg==
-#   secretKey: cGdwYXNzd29yZA==
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dc-backup-s3-credentials
+  namespace: rook-ceph
+type: Opaque
+data:
+  accessKey: EMSAHCKLI8AKHD3972RQ
+  secretKey: wRiLHBw01eJCWVQyQyxXukEia4ZQoNB7AvFowztd
 ---
 apiVersion: v1
 kind: Service
