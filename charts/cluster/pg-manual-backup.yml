@@ -23,17 +23,6 @@ metadata:
   name: backup-example
   namespace: postgresdc
 spec:
-  cluster:
-    name: dc-cluster
   method: barmanObjectStore
-  destinationPath: s3://dc-backups-bucket/dc
-  endpointURL: http://pg-backup.k8s.local
-  s3Credentials:
-    accessKeyId:
-      key: ACCESS_KEY_ID
-      name: dc-cluster-backup-s3-creds
-    secretAccessKey:
-      key: ACCESS_SECRET_KEY
-      name: dc-cluster-backup-s3-creds
-  serverName: dc-cluster
-
+  cluster:
+    name: dc-cluster    
