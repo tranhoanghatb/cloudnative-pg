@@ -296,6 +296,14 @@ backups:
   # -- You need to configure backups manually, so backups are disabled by default.
   enabled: true
 
+  method: volumeSnapshot
+  volumeSnapshot:
+    className: rook-ceph-block  # Replace with your VolumeSnapshotClass name
+    labels:                     # Optional labels for the snapshot
+      environment: production
+    annotations:                # Optional annotations for the snapshot
+      backup-type: manual
+      
   # -- Overrides the provider specific default endpoint. Defaults to:
   # S3: https://s3.<region>.amazonaws.com"
   endpointURL: "https://pg-backup.k8s.local"  # Leave empty if using the default S3 endpoint
