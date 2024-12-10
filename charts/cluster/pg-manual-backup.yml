@@ -20,10 +20,10 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Backup
 metadata:
-  name: backup-example
+  name: backup-example-volumeSnapshot
   namespace: postgresdc
 spec:
-  method: barmanObjectStore
+  method: volumeSnapshot
   cluster:
     name: dc-cluster    
   # env:
