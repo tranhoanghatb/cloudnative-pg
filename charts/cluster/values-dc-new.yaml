@@ -311,7 +311,7 @@ backups:
   # S3: s3://<bucket><path>
   # Azure: https://<storageAccount>.<serviceName>.core.windows.net/<containerName><path>
   # Google: gs://<bucket><path>
-  destinationPath: "s3://dc-backups-bucket"
+  destinationPath: "s3://dc-backups-bucket/dc"
   # -- One of `s3`, `azure` or `google`
   provider: s3
   s3:
