@@ -319,12 +319,14 @@ backups:
     endpoint: "https://pg-backup.k8s.local"
     bucket: "dc-backups-bucket"
     path: "/dc"
-    secretKeyRef:
-      name: rook-ceph-object-user-pg-backup-dc-backup-user  # Secret name
-      key: SecretKey                                       # Key for SecretKey
-    accessKeyRef:
-      name: rook-ceph-object-user-pg-backup-dc-backup-user  # Secret name
-      key: AccessKey                                       # Key for AccessKey
+    accessKey: "EMSAHCKLI8AKHD3972RQ"   # Add the access key directly
+    secretKey: "wRiLHBw01eJCWVQyQyxXukEia4ZQoNB7AvFowztd"   # Add the secret key directly
+    # secretKeyRef:
+    #   name: rook-ceph-object-user-pg-backup-dc-backup-user  # Secret name
+    #   key: SecretKey                                       # Key for SecretKey
+    # accessKeyRef:
+    #   name: rook-ceph-object-user-pg-backup-dc-backup-user  # Secret name
+    #   key: AccessKey                                       # Key for AccessKey
   retentionPolicy: "30d"
   azure:
     path: "/"
