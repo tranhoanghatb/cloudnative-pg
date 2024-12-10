@@ -59,6 +59,7 @@ type: Opaque
 data:
   accessKey: EMSAHCKLI8AKHD3972RQ
   secretKey: wRiLHBw01eJCWVQyQyxXukEia4ZQoNB7AvFowztd
+  demo: test
 ---
 apiVersion: v1
 kind: Service
