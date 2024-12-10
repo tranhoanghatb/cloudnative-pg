@@ -316,11 +316,15 @@ backups:
   provider: s3
   s3:
     region: "us-east-1"
-    endpoint: "http://pg-backup.k8s.local"
+    endpoint: "https://pg-backup.k8s.local"
     bucket: "dc-backups-bucket"
     path: "/dc"
-    accessKey: "access-key123" 
-    secretKey: "secret-key123" 
+    secretKeyRef:
+      name: rook-ceph-object-user-pg-backup-dc-backup-user  # Secret name
+      key: SecretKey                                       # Key for SecretKey
+    accessKeyRef:
+      name: rook-ceph-object-user-pg-backup-dc-backup-user  # Secret name
+      key: AccessKey                                       # Key for AccessKey
   retentionPolicy: "30d"
   azure:
     path: "/"

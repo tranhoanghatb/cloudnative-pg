@@ -19,8 +19,27 @@ spec:
   gateway:
     # sslCertificateRef:
     port: 80
-    # securePort: 443
+    #securePort: 443
     instances: 1
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+   name: dc-backups-bucket
+# Change "rook-ceph" provisioner prefix to match the operator namespace if needed
+provisioner: rook-ceph.ceph.rook.io/bucket
+reclaimPolicy: Delete
+parameters:
+  objectStoreName: pg-backup
+  objectStoreNamespace: rook-ceph
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: dc-backups-bucket-claim
+spec:
+  generateBucketName: ceph-bkt
+  storageClassName: dc-backups-bucket
 ---
 apiVersion: ceph.rook.io/v1
 kind: CephObjectStoreUser
@@ -30,30 +49,39 @@ metadata:
 spec:
   store: pg-backup  
   displayName: "Backup User for DC"
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: dc-backup-s3-credentials
-  namespace: rook-ceph
-type: Opaque
-data:
-  accessKey: cGdhZG1pbg==
-  secretKey: cGdwYXNzd29yZA==
+# ---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: dc-backup-s3-credentials
+#   namespace: rook-ceph
+# type: Opaque
+# data:
+#   accessKey: cGdhZG1pbg==
+#   secretKey: cGdwYXNzd29yZA==
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: rook-ceph-rgw-pg-backup
   namespace: rook-ceph
+  labels:
+    app: rook-ceph-rgw
+    rook_cluster: rook-ceph
+    rook_object_store: pg-backup
 spec:
-  type: LoadBalancer
+  ports:
+  - name: rgw
+    port: 80
+    protocol: TCP
+    targetPort: 80
   selector:
     app: rook-ceph-rgw
-  ports:
-    - protocol: TCP
-      port: 80        
-      targetPort: 80  
+    rook_cluster: rook-ceph
+    rook_object_store: pg-backup
+  sessionAffinity: None
+  type: ClusterIP
+ 
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
