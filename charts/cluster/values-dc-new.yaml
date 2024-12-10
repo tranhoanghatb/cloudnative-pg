@@ -322,7 +322,7 @@ backups:
   # -- One of `s3`, `azure` or `google`
   provider: s3
   s3:
-    region: "pg-backup"
+    region: ""
     endpoint: "https://pg-backup.k8s.local"
     bucket: "dc-backups-bucket"
     path: "/dc"
