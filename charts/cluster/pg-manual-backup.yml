@@ -20,7 +20,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Backup
 metadata:
-  name: backup-example-volumeSnapshot
+  name: backup-example-volumesnapshot
   namespace: postgresdc
 spec:
   method: volumeSnapshot
