@@ -11,9 +11,9 @@ spec:
     destinationPath: s3://dc-backups-bucket/dc
     credentials:
       accessKeyId:
-        value: "access-key123"
+        value: "EMSAHCKLI8AKHD3972RQ"
       secretAccessKey:
-        value: "secret-key123"
+        value: "wRiLHBw01eJCWVQyQyxXukEia4ZQoNB7AvFowztd"
     s3:
       endpoint: "http://pg-backup.k8s.local"
       region: "us-east-1"
