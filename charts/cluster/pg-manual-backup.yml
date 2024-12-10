@@ -26,3 +26,14 @@ spec:
   method: barmanObjectStore
   cluster:
     name: dc-cluster    
+  env:
+  - name: AWS_ACCESS_KEY_ID
+    valueFrom:
+          secretKeyRef:
+            key: ACCESS_KEY_ID
+            name: dc-cluster-backup-s3-creds
+  - name: AWS_ACCESS_SECRET_KEY
+    valueFrom:
+          secretKeyRef:
+            key: ACCESS_SECRET_KEY
+            name: dc-cluster-backup-s3-creds
