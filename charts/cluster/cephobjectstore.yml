@@ -111,4 +111,15 @@ metadata:
   name: rook-ceph-block
 driver: rook-ceph.rbd.csi.ceph.com
 deletionPolicy: Delete
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: snapshot-cluster
+  namespace: postgresdc  
+spec:
+  backup:
+    # Volume snapshot backups
+    volumeSnapshot:
+       className: rook-ceph-block
 
