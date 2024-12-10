@@ -375,7 +375,7 @@ backups:
       # -- Scheduled backup name
       name: daily-backup
       # -- Schedule in cron format
-      schedule: "*/5 * * * *"
+      schedule: "*/15 * * * *"
       # -- Backup owner reference
       backupOwnerReference: self
       # -- Backup method, can be `barmanObjectStore` (default) or `volumeSnapshot`
