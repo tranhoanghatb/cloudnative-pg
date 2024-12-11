@@ -165,12 +165,12 @@ cluster:
   # We strongly advise you use the same setting for limits and requests so that your cluster pods are given a Guaranteed QoS.
   # See: https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/
   resources: {}
-    # limits:
-    #   cpu: 2000m
-    #   memory: 8Gi
-    # requests:
-    #   cpu: 2000m
-    #   memory: 8Gi
+    limits:
+      cpu: 2000m
+      memory: 8Gi
+    requests:
+      cpu: 2000m
+      memory: 8Gi
 
   priorityClassName: ""
 
@@ -258,11 +258,11 @@ cluster:
 
   postgresql:
     # -- PostgreSQL configuration options (postgresql.conf)
-    parameters:
-      max_connections: "300"
+    # parameters:
+    #   max_connections: "300"
     # -- PostgreSQL Host Based Authentication rules (lines to be appended to the pg_hba.conf file)
-    pg_hba:
-      - host all all 10.244.0.0/16 md5
+    # pg_hba:
+    #   - host all all 10.244.0.0/16 md5
     # -- PostgreSQL User Name Maps rules (lines to be appended to the pg_ident.conf file)
     pg_ident: []
       # - mymap   /^(.*)@mydomain\.com$      \1
@@ -274,14 +274,14 @@ cluster:
   # See: https://cloudnative-pg.io/documentation/current/bootstrap/
   # See: https://cloudnative-pg.io/documentation/current/cloudnative-pg.v1/#postgresql-cnpg-io-v1-bootstrapinitdb
   initdb: 
-    database: app
+    # database: app
     # owner: "" # Defaults to the database name
     # secret:
     #   name: "" # Name of the secret containing the initial credentials for the owner of the user database. If empty a new secret will be created from scratch
     # options: []
-    encoding: UTF8
-    postInitSQL:
-      - CREATE EXTENSION IF NOT EXISTS vector;
+    # encoding: UTF8
+    # postInitSQL:
+    #   - CREATE EXTENSION IF NOT EXISTS vector;
     # postInitApplicationSQL: []
     # postInitTemplateSQL: []
 
@@ -296,17 +296,17 @@ backups:
   # -- You need to configure backups manually, so backups are disabled by default.
   enabled: true
 
-  volumeSnapshot:
-    className: rook-ceph-block  # Replace with your VolumeSnapshotClass name
-    labels:                     # Optional labels for the snapshot
-      environment: production
-    annotations:                # Optional annotations for the snapshot
-      backup-type: manual
+  # volumeSnapshot:
+  #   className: rook-ceph-block  # Replace with your VolumeSnapshotClass name
+  #   labels:                     # Optional labels for the snapshot
+  #     environment: production
+  #   annotations:                # Optional annotations for the snapshot
+  #     backup-type: manual
 
   # -- Overrides the provider specific default endpoint. Defaults to:
   # S3: https://s3.<region>.amazonaws.com"
   endpointURL: "https://pg-backup.k8s.local"  # Leave empty if using the default S3 endpoint
-  sslMode: "disable"
+  # sslMode: "disable"
   # -- Specifies a CA bundle to validate a privately signed certificate.
   endpointCA:
     # -- Creates a secret with the given value if true, otherwise uses an existing secret.
@@ -323,7 +323,7 @@ backups:
   # -- One of `s3`, `azure` or `google`
   provider: s3
   s3:
-    region: ""
+    region: "pg-backup"
     endpoint: "https://pg-backup.k8s.local"
     bucket: "dc-backups-bucket"
     path: "/dc"
@@ -361,14 +361,14 @@ backups:
     # -- WAL compression method. One of `` (for no compression), `gzip`, `bzip2` or `snappy`.
     compression: ""
     # -- Whether to instruct the storage provider to encrypt WAL files. One of `` (use the storage container default), `AES256` or `aws:kms`.
-    # encryption: AES256
+    encryption: AES256
     # -- Number of WAL files to be archived or restored in parallel.
     maxParallel: 8
   data:
     # -- Data compression method. One of `` (for no compression), `gzip`, `bzip2` or `snappy`.
     compression: ""
     # -- Whether to instruct the storage provider to encrypt data files. One of `` (use the storage container default), `AES256` or `aws:kms`.
-    # encryption: AES256
+    encryption: AES256
     # -- Number of data files to be archived or restored in parallel.
     jobs: 8
 
