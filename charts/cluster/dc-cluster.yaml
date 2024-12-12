@@ -24,8 +24,8 @@ metadata:
   name: backup-creds
   namespace: postgres1
 data:
-  ACCESS_KEY_ID: NjU3MlFLV1dBU1RKVFRRWFFRRDg=
-  ACCESS_SECRET_KEY: YUZCT1FlZnR2TEFPQXBxaGZUUk8ydFlFbzZwSTVyNjB5STc5dHJQTQ==
+  ACCESS_KEY_ID: EMSAHCKLI8AKHD3972RQ
+  ACCESS_SECRET_KEY: wRiLHBw01eJCWVQyQyxXukEia4ZQoNB7AvFowztd
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
