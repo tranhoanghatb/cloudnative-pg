@@ -119,9 +119,9 @@ metadata:
   namespace: postgresdc
 type: Opaque
 data:
-  AWS_HOST: cGctYmFja3VwLms4cy5sb2NhbA== # Base64 encoded value of "pg-backup.k8s.local"
+  HOST: cGctYmFja3VwLms4cy5sb2NhbA== # Base64 encoded value of "pg-backup.k8s.local"
   PORT: ODA=                              # Base64 encoded value of "80"
-  AWS_ACCESS_KEY_ID: RU1TQUhDS0xJOEFLSEQzOTcyUlE= # Base64 encoded value of "EMSAHCKLI8AKHD3972RQ"
-  AWS_SECRET_ACCESS_KEY: d1JpTEhCdzAxZUpDV1ZReVF5eFh1a0VpYTRaUW9OQjdBdkZvd3p0ZA== # Base64 encoded value of the key
-  AWS_REGION: cGctYmFja3Vw                 # Base64 encoded value of "pg-backup"
+  ACCESS_KEY_ID: RU1TQUhDS0xJOEFLSEQzOTcyUlE= # Base64 encoded value of "EMSAHCKLI8AKHD3972RQ"
+  SECRET_ACCESS_KEY: d1JpTEhCdzAxZUpDV1ZReVF5eFh1a0VpYTRaUW9OQjdBdkZvd3p0ZA== # Base64 encoded value of the key
+  REGION: cGctYmFja3Vw                 # Base64 encoded value of "pg-backup"
 
