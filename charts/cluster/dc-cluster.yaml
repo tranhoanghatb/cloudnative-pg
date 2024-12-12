@@ -34,7 +34,8 @@ metadata:
   namespace: postgres1
 spec:
   description: "Example of cluster"
-  imageName: custom-postgresql:16.2
+  image: custom-postgresql:16.2
+  imagePullPolicy: IfNotPresent
   # logLevel: debug
   # imagePullSecret is only required if the images are located in a private registry
   # imagePullSecrets:
