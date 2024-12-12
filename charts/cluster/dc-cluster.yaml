@@ -87,6 +87,8 @@ spec:
         secretAccessKey:
           name: backup-creds
           key: ACCESS_SECRET_KEY
+      caSecret:
+        name: backup-ca-cert          
       wal:
         # compression: gzip
         # encryption: AES256
@@ -96,6 +98,7 @@ spec:
         immediateCheckpoint: false
         jobs: 2
     retentionPolicy: "10d"
+
 ---    
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
