@@ -305,14 +305,14 @@ backups:
 
   # -- Overrides the provider specific default endpoint. Defaults to:
   # S3: https://s3.<region>.amazonaws.com"
-  endpointURL: "https://pg-backup.k8s.local"  # Leave empty if using the default S3 endpoint
+  endpointURL: "https://pg-backup.cpt.gov.vn"  # Leave empty if using the default S3 endpoint
   # sslMode: "disable"
   # -- Specifies a CA bundle to validate a privately signed certificate.
   endpointCA:
     # -- Creates a secret with the given value if true, otherwise uses an existing secret.
     create: false
-    name: "juju-s3-ca-secret"
-    key: "server.crt"
+    name: ""
+    key: ""
     value: ""
 
 
@@ -325,7 +325,7 @@ backups:
   provider: s3
   s3:
     region: "pg-backup"
-    endpoint: "https://pg-backup.k8s.local"
+    endpoint: "https://pg-backup.cpt.gov.vn"
     bucket: "dc-backups-bucket"
     path: "/dc"
     accessKey: "EMSAHCKLI8AKHD3972RQ"   # Add the access key directly
