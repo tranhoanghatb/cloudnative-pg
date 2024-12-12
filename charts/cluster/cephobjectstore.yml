@@ -94,7 +94,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - host: pg-backup.k8s.local
+  - host: pg-backup.cpt.gov.vn
     http:
       paths:
       - path: /

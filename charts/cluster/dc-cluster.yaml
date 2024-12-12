@@ -79,7 +79,7 @@ spec:
   backup:
     barmanObjectStore:
       destinationPath: "s3://demo"
-      endpointURL: "https://pg-backup.k8s.local"
+      endpointURL: "https://pg-backup.cpt.gov.vn"
       s3Credentials:
         accessKeyId:
           name: backup-creds
