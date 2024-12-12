@@ -34,3 +34,8 @@ data:
         cache 30
         forward . 172.16.0.1
     }
+    cpt.gov.vn:53 {
+        errors
+        cache 30
+        forward . 172.16.0.1
+    }
