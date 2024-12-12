@@ -43,6 +43,9 @@ spec:
   startDelay: 300
   stopDelay: 300
   primaryUpdateStrategy: unsupervised
+  env:
+  - name: TZ
+    value: Asia/Ho_Chi_Minh
 
   postgresql:
     parameters:
@@ -74,7 +77,7 @@ spec:
 
   backup:
     barmanObjectStore:
-      destinationPath: "s3://dc-backups-bucket/"
+      destinationPath: "s3://demo"
       endpointURL: "https://pg-backup.k8s.local"
       s3Credentials:
         accessKeyId:
