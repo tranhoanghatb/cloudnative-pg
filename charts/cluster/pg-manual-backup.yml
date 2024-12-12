@@ -21,7 +21,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Backup
 metadata:
   name: backup-example
-  namespace: postgresdc
+  namespace: postgres1
 spec:
   method: barmanObjectStore
   cluster:
