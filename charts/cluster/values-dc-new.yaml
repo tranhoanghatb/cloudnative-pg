@@ -327,7 +327,7 @@ backups:
     region: "pg-backup"
     endpoint: "https://pg-backup.cpt.gov.vn"
     bucket: "dc-backups-bucket"
-    path: "/dc"
+    path: "/"
     accessKey: "EMSAHCKLI8AKHD3972RQ"   # Add the access key directly
     secretKey: "wRiLHBw01eJCWVQyQyxXukEia4ZQoNB7AvFowztd"   # Add the secret key directly
     # sslMode: "disable"
@@ -354,7 +354,7 @@ backups:
     applicationCredentials: ""
   secret:
     # -- Whether to create a secret for the backup credentials
-    create: false
+    create: true
     # -- Name of the backup credentials secret
     name: "helm-dc-cluster-backup-s3-creds"
 
