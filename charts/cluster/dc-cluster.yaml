@@ -78,7 +78,7 @@ spec:
 
   backup:
     barmanObjectStore:
-      destinationPath: "s3://demo"
+      destinationPath: "s3://dc-backups-bucket/dc"
       endpointURL: "https://pg-backup.cpt.gov.vn"
       s3Credentials:
         accessKeyId:
