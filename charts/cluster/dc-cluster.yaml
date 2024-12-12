@@ -74,7 +74,7 @@ spec:
 
   backup:
     barmanObjectStore:
-      destinationPath: "dc-backups-bucket/dc/"
+      destinationPath: "s3://dc-backups-bucket/"
       endpointURL: "https://pg-backup.k8s.local"
       s3Credentials:
         accessKeyId:
@@ -97,6 +97,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
   name: backup-example
+  namespace: postgres1
 spec:
   schedule: "0 0 0 * * *"
   backupOwnerReference: self
