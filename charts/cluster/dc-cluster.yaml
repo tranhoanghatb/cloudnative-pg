@@ -92,7 +92,16 @@ spec:
         immediateCheckpoint: false
         jobs: 2
     retentionPolicy: "10d"
-
+---    
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: backup-example
+spec:
+  schedule: "0 0 0 * * *"
+  backupOwnerReference: self
+  cluster:
+    name: cluster-example-full
   # resources:
   #   requests:
   #     memory: "512Mi"
