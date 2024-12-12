@@ -25,7 +25,7 @@ metadata:
 spec:
   method: barmanObjectStore
   cluster:
-    name: dc-cluster    
+    name: cluster-example-full
   # env:
   # - name: AWS_ACCESS_KEY_ID
   #   valueFrom:
