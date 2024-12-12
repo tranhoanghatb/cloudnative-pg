@@ -356,7 +356,7 @@ backups:
     # -- Whether to create a secret for the backup credentials
     create: false
     # -- Name of the backup credentials secret
-    name: "aws-dc-cluster-backup-s3-creds"
+    name: "backup-creds"
 
   wal:
     # -- WAL compression method. One of `` (for no compression), `gzip`, `bzip2` or `snappy`.
