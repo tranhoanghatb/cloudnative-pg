@@ -87,8 +87,9 @@ spec:
         secretAccessKey:
           name: backup-creds
           key: ACCESS_SECRET_KEY
-      caSecret:
-        name: backup-ca-cert          
+      endpointCA:
+        name: backup-ca-cert       
+        key: "server.crt"   
       wal:
         # compression: gzip
         # encryption: AES256
