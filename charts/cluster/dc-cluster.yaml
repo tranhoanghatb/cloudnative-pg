@@ -24,8 +24,8 @@ metadata:
   name: backup-creds
   namespace: postgres1
 data:
-  ACCESS_KEY_ID: EMSAHCKLI8AKHD3972RQ
-  ACCESS_SECRET_KEY: wRiLHBw01eJCWVQyQyxXukEia4ZQoNB7AvFowztd
+  ACCESS_KEY_ID: rootUser
+  ACCESS_SECRET_KEY: rootPassword
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
@@ -79,7 +79,7 @@ spec:
   backup:
     barmanObjectStore:
       destinationPath: "s3://dc-backups-bucket/dc"
-      endpointURL: "https://pg-backup.cpt.gov.vn"
+      endpointURL: "http://minio-s3.minio.svc.cluster.local:9000"
       s3Credentials:
         accessKeyId:
           name: backup-creds
