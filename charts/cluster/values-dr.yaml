@@ -61,7 +61,7 @@ recovery:
   # Google: gs://<bucket><path>
   destinationPath: "s3://dc-backups-bucket"
   # -- One of `s3`, `azure` or `google`
-  #1provider: s3
+  provider: s3
   # s3:
   #   region: ""
   #   endpoint: "https://minio-dc.k8s.local"
