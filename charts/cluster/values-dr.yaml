@@ -62,13 +62,13 @@ recovery:
   destinationPath: "s3://dc-backups-bucket/dc-cluster"
   # -- One of `s3`, `azure` or `google`
   provider: s3
-  # s3:
-  #   region: ""
-  #   endpoint: "https://minio-dc.k8s.local"
-  #   bucket: "s3://dc-backups-bucket"  # The bucket name
-  #   path: "/"  # Path to backups inside the bucket
-  #   accessKey: "console"   # Add the access key directly
-  #   secretKey: "console123"   # Add the secret key directly
+  s3:
+    region: ""
+    endpoint: "https://minio-dc.k8s.local"
+    bucket: "s3://dc-backups-bucket"  # The bucket name
+    path: "dc-cluster"  # Path to backups inside the bucket
+    accessKey: "console"   # Add the access key directly
+    secretKey: "console123"   # Add the secret key directly
   # azure:
   #   path: "/"
   #   connectionString: ""
