@@ -24,8 +24,8 @@ metadata:
   name: backup-creds
   namespace: postgres1
 data:
-  ACCESS_KEY_ID: rootUser
-  ACCESS_SECRET_KEY: rootPassword
+  ACCESS_KEY_ID: console
+  ACCESS_SECRET_KEY: console123
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
