@@ -328,8 +328,8 @@ backups:
     endpoint: "http://minio-s3.minio.svc.cluster.local:9000"
     bucket: "s3://dc-backups-bucket"
     path: "/"
-    accessKey: ""   # Add the access key directly
-    secretKey: ""   # Add the secret key directly
+    accessKey: "console"   # Add the access key directly
+    secretKey: "console123"   # Add the secret key directly
     # sslMode: "disable"
     # secretKeyRef:
     #   name: rook-ceph-object-user-pg-backup-dc-backup-user  # Secret name
@@ -354,9 +354,9 @@ backups:
     applicationCredentials: ""
   secret:
     # -- Whether to create a secret for the backup credentials
-    create: false
+    create: true
     # -- Name of the backup credentials secret
-    name: "helm-dc-cluster-backup-s3-creds"
+    name: ""
 
   wal:
     # -- WAL compression method. One of `` (for no compression), `gzip`, `bzip2` or `snappy`.
