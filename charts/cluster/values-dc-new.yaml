@@ -354,9 +354,9 @@ backups:
     applicationCredentials: ""
   secret:
     # -- Whether to create a secret for the backup credentials
-    create: true
+    create: false
     # -- Name of the backup credentials secret
-    name: ""
+    name: "helm-dc-cluster-backup-s3-creds"
 
   wal:
     # -- WAL compression method. One of `` (for no compression), `gzip`, `bzip2` or `snappy`.
