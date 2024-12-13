@@ -35,9 +35,9 @@ recovery:
   method: object_store
 
   ## -- Point in time recovery target. Specify one of the following:
-  # pitrTarget:
-  #   # -- Time in RFC3339 format
-  #   time: ""
+  pitrTarget:
+    # -- Time in RFC3339 format
+    time: "20241213T073941"
 
   ##
   # -- Backup Recovery Method
