@@ -328,8 +328,8 @@ backups:
     endpoint: "http://minio-s3.minio.svc.cluster.local:9000"
     bucket: "s3://dc-backups-bucket"
     path: "/"
-    accessKey: "console"   # Add the access key directly
-    secretKey: "console123"   # Add the secret key directly
+    accessKey: ""   # Add the access key directly
+    secretKey: ""   # Add the secret key directly
     # sslMode: "disable"
     # secretKeyRef:
     #   name: rook-ceph-object-user-pg-backup-dc-backup-user  # Secret name
