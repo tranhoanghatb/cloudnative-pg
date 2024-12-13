@@ -41,7 +41,7 @@ recovery:
 
   ##
   # -- Backup Recovery Method
-  backupName: "dc-cluster"  # Name of the backup to recover from. Required if method is `backup`.
+  #backupName: "dc-cluster"  # Name of the backup to recover from. Required if method is `backup`.
 
   ##
   # -- The original cluster name when used in backups. Also known as serverName.
@@ -59,16 +59,16 @@ recovery:
   # S3: s3://<bucket><path>
   # Azure: https://<storageAccount>.<serviceName>.core.windows.net/<containerName><path>
   # Google: gs://<bucket><path>
-  destinationPath: "s3://dc-backups-bucket/dc-cluster/base/"
+  destinationPath: "s3://dc-backups-bucket"
   # -- One of `s3`, `azure` or `google`
   provider: s3
-  s3:
-    region: ""
-    endpoint: "https://minio-dc.k8s.local"
-    bucket: "dc-backups-bucket"  # The bucket name
-    path: "/dc-cluster/base"  # Path to backups inside the bucket
-    accessKey: "console"   # Add the access key directly
-    secretKey: "console123"   # Add the secret key directly
+  # s3:
+  #   region: ""
+  #   endpoint: "https://minio-dc.k8s.local"
+  #   bucket: "s3://dc-backups-bucket"  # The bucket name
+  #   path: "/"  # Path to backups inside the bucket
+  #   accessKey: "console"   # Add the access key directly
+  #   secretKey: "console123"   # Add the secret key directly
   # azure:
   #   path: "/"
   #   connectionString: ""
