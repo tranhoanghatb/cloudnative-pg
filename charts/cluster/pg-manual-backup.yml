@@ -1,39 +1,9 @@
-# apiVersion: postgresql.cnpg.io/v1
-# kind: Backup
-# metadata:
-#   name: dc-cluster-backup
-#   namespace: postgresdc
-# spec:
-#   method: barmanObjectStore
-#   cluster:
-#     name: dc-cluster
-#   target:
-#     destinationPath: s3://dc-backups-bucket/dc
-#     credentials:
-#       accessKeyId:
-#         value: "EMSAHCKLI8AKHD3972RQ"
-#       secretAccessKey:
-#         value: "wRiLHBw01eJCWVQyQyxXukEia4ZQoNB7AvFowztd"
-#     s3:
-#       endpoint: "http://pg-backup.k8s.local"
-#       region: "us-east-1"
 apiVersion: postgresql.cnpg.io/v1
 kind: Backup
 metadata:
   name: backup-example
-  namespace: postgres1
+  namespace: postgresdc
 spec:
   method: barmanObjectStore
   cluster:
     name: cluster-example-full
-  # env:
-  # - name: AWS_ACCESS_KEY_ID
-  #   valueFrom:
-  #         secretKeyRef:
-  #           key: ACCESS_KEY_ID
-  #           name: dc-cluster-backup-s3-creds
-  # - name: AWS_ACCESS_SECRET_KEY
-  #   valueFrom:
-  #         secretKeyRef:
-  #           key: ACCESS_SECRET_KEY
-  #           name: dc-cluster-backup-s3-creds
