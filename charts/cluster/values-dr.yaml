@@ -87,7 +87,7 @@ recovery:
     # -- Whether to create a secret for the backup credentials
     create: false
     # -- Name of the backup credentials secret
-    name: ""
+    name: "helm-dc-cluster-backup-s3-creds"
 
   # See https://cloudnative-pg.io/documentation/1.22/bootstrap/#bootstrap-from-a-live-cluster-pg_basebackup
   # pgBaseBackup:
