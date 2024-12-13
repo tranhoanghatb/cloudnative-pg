@@ -37,7 +37,7 @@ recovery:
   ## -- Point in time recovery target. Specify one of the following:
   pitrTarget:
     # -- Time in RFC3339 format
-    time: "20241213T073941"
+    time: "2024-12-13T07:39:41Z"
 
   ##
   # -- Backup Recovery Method
