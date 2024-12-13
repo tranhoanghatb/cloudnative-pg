@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: helm-dc-cluster-backup-s3-creds
+  namespace: postgresdr
+type: Opaque
+data:
+  ACCESS_KEY_ID: Y29uc29sZQ==        # Base64 encoded value for "console"
+  SECRET_ACCESS_KEY: Y29uc29sZTEyMw== # Base64 encoded value for "console123"
