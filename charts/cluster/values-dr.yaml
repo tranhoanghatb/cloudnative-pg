@@ -37,7 +37,7 @@ recovery:
   ## -- Point in time recovery target. Specify one of the following:
   pitrTarget:
     # -- Time in RFC3339 format
-    time: "2024-12-13T07:39:41Z"
+    time: ""
 
   ##
   # -- Backup Recovery Method
@@ -59,7 +59,7 @@ recovery:
   # S3: s3://<bucket><path>
   # Azure: https://<storageAccount>.<serviceName>.core.windows.net/<containerName><path>
   # Google: gs://<bucket><path>
-  destinationPath: "s3://dc-backups-bucket"
+  destinationPath: "s3://dc-backups-bucket/dc-cluster"
   # -- One of `s3`, `azure` or `google`
   provider: s3
   # s3:
