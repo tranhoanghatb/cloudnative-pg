@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: helm-dc-cluster-backup-s3-creds
+  name: helm-dr-cluster-backup-s3-creds
   namespace: postgresdr
 type: Opaque
 data:
