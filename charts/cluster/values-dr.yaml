@@ -87,7 +87,7 @@ recovery:
     # -- Whether to create a secret for the backup credentials
     create: false
     # -- Name of the backup credentials secret
-    name: ""
+    name: "minio-ca-secret"
 
   # See https://cloudnative-pg.io/documentation/1.22/bootstrap/#bootstrap-from-a-live-cluster-pg_basebackup
   # pgBaseBackup:
