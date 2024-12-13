@@ -305,7 +305,7 @@ backups:
 
   # -- Overrides the provider specific default endpoint. Defaults to:
   # S3: https://s3.<region>.amazonaws.com"
-  endpointURL: "https://pg-backup.cpt.gov.vn"  # Leave empty if using the default S3 endpoint
+  endpointURL: "http://minio-s3.minio.svc.cluster.local:9000"  # Leave empty if using the default S3 endpoint
   # sslMode: "disable"
   # -- Specifies a CA bundle to validate a privately signed certificate.
   endpointCA:
@@ -320,16 +320,16 @@ backups:
   # S3: s3://<bucket><path>
   # Azure: https://<storageAccount>.<serviceName>.core.windows.net/<containerName><path>
   # Google: gs://<bucket><path>
-  destinationPath: "s3://dc-backups-bucket/dc"
+  destinationPath: ""
   # -- One of `s3`, `azure` or `google`
   provider: s3
   s3:
-    region: "pg-backup"
-    endpoint: "https://pg-backup.cpt.gov.vn"
-    bucket: "dc-backups-bucket"
+    region: ""
+    endpoint: "http://minio-s3.minio.svc.cluster.local:9000"
+    bucket: ""
     path: "/"
-    accessKey: "EMSAHCKLI8AKHD3972RQ"   # Add the access key directly
-    secretKey: "wRiLHBw01eJCWVQyQyxXukEia4ZQoNB7AvFowztd"   # Add the secret key directly
+    accessKey: "rootUser"   # Add the access key directly
+    secretKey: "rootPassword"   # Add the secret key directly
     # sslMode: "disable"
     # secretKeyRef:
     #   name: rook-ceph-object-user-pg-backup-dc-backup-user  # Secret name
