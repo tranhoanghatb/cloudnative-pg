@@ -1,3 +1,4 @@
+---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
@@ -20,3 +21,13 @@ spec:
     volumeSnapshot:
       # Thêm cấu hình cho VolumeSnapshot
       className: csi-cephfsplugin-snapclass
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Backup
+metadata:
+  name: backup-example
+  namespace: postgres3
+spec:
+  method: volumeSnapshot
+  cluster:
+    name: cluster-example-initdb
