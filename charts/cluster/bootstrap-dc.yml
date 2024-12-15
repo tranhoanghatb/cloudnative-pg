@@ -20,4 +20,4 @@ spec:
   backup:
     volumeSnapshot:
       # Thêm cấu hình cho VolumeSnapshot
-      className: rook-ceph-block  
+      className: csi-cephfsplugin-snapclass
