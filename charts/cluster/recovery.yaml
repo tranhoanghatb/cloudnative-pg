@@ -20,7 +20,7 @@ spec:
     - name: dc-cluster
       barmanObjectStore:
         endpointURL: "http://minio-s3.minio.svc.cluster.local:9000"
-        destinationPath: "s3://dc-backups-bucket/dc-cluster" #s3://bucket, NOTE: externalClusters.name will be appended here
+        destinationPath: "s3://dc-backups-bucket" #s3://bucket, NOTE: externalClusters.name will be appended here
         s3Credentials:
           accessKeyId:
             name: helm-dc-cluster-backup-s3-creds
