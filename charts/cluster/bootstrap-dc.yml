@@ -1,0 +1,25 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: new-postgres-cluster
+  namespace: postgresdc
+spec:
+  instances: 3
+  storage:
+    storageClass: "rook-cephfs"  # Storage class sử dụng cho Persistent Volumes
+    size: 10Gi  # Kích thước dung lượng cho mỗi instance
+
+  # Cấu hình backup với VolumeSnapshot
+  backup:
+    enabled: true  # Bật tính năng sao lưu
+    schedule: "0 2 * * *"  # Lịch sao lưu định kỳ (cron schedule)
+    volumeSnapshot:
+      # Thêm cấu hình cho VolumeSnapshot
+      className: rook-ceph-block  # Tên của VolumeSnapshotClass đã được cấu hình
+      labels:
+        environment: production  # Thêm nhãn nếu cần
+      annotations:
+        backup-type: "manual"  # Thêm chú thích cho backup
+      # Xác định các namespace và các Persistent Volume Claims (PVC) của PostgreSQL mà bạn muốn sao lưu
+      persistentVolumeClaims:
+        - rook-cephfs  # PVC của PostgreSQL (cần phải thay bằng tên PVC của bạn)
