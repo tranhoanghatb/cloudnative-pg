@@ -1,31 +1,18 @@
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
-metadata:
-  name: boostrap-demo-cnpg
-  namespace: postgresdr
-spec:
-  instances: 3
-  storage:
-    storageClass: "rook-cephfs"
-    size: 10Gi
-  bootstrap:
-    recovery:
-      source: dc-cluster
-      recoveryTarget:
-        targetTime: "2024-12-15 00:00:01+00"
 
-  externalClusters:
-    # The external cluster definition
-    - name: dc-cluster
-      barmanObjectStore:
-        endpointURL: "http://minio-s3.minio.svc.cluster.local:9000"
-        destinationPath: "s3://dc-backups-bucket/dc-cluster" # Include the correct path within the bucket
-        s3Credentials:
-          accessKeyId:
-            name: helm-dc-cluster-backup-s3-creds
-            key: SECRET_ACCESS_KEY
-          secretAccessKey:
-            name: helm-dc-cluster-backup-s3-creds
-            key: ACCESS_SECRET_KEY
-        wal:
-          maxParallel: 8
+type: postgresql
+mode: recovery
+
+recovery:
+  method: object_store
+  clusterName: "dc-cluster"
+  endpointURL: "http://minio-s3.minio.svc.cluster.local:9000"
+  provider: s3
+  s3:
+    region: ""
+    bucket: "dc-backups-bucket"
+    path: "/dc-cluster"
+    accessKey: "console"
+    secretKey: "console123"
+
+cluster:
+  instances: 1
