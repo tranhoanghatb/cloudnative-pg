@@ -21,5 +21,3 @@ spec:
       annotations:
         backup-type: "manual"  # Thêm chú thích cho backup
       # Xác định các namespace và các Persistent Volume Claims (PVC) của PostgreSQL mà bạn muốn sao lưu
-      persistentVolumeClaims:
-        - rook-cephfs  # PVC của PostgreSQL (cần phải thay bằng tên PVC của bạn)
