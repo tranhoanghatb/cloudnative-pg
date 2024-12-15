@@ -105,13 +105,6 @@ spec:
             port:
               number: 80
 ---
-apiVersion: snapshot.storage.k8s.io/v1
-kind: VolumeSnapshotClass
-metadata:
-  name: rook-ceph-block
-driver: rook-ceph.rbd.csi.ceph.com
-deletionPolicy: Delete
----
 apiVersion: v1
 kind: Secret
 metadata:
@@ -122,4 +115,17 @@ data:
   ACCESS_KEY_ID: Y29uc29sZQ==        # Base64 encoded value for "console"
   SECRET_ACCESS_KEY: Y29uc29sZTEyMw== # Base64 encoded value for "console123"
 
-
+---
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass
+metadata:
+  name: rook-ceph-block
+driver: rook-ceph.rbd.csi.ceph.com # driver:namespace:operator
+parameters:
+  # Specify a string that identifies your cluster. Ceph CSI supports any
+  # unique string. When Ceph CSI is deployed by Rook use the Rook namespace,
+  # for example "rook-ceph".
+  clusterID: rook-ceph # namespace:cluster
+  csi.storage.k8s.io/snapshotter-secret-name: rook-csi-rbd-provisioner
+  csi.storage.k8s.io/snapshotter-secret-namespace: rook-ceph # namespace:cluster
+deletionPolicy: Delete
