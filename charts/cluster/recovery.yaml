@@ -7,7 +7,7 @@ metadata:
 spec:
   instances: 3
   storage:
-    storageClass: local-path
+    storageClass: ""
     size: 10Gi
   bootstrap:
     recovery:
