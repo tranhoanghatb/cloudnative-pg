@@ -1,0 +1,32 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: boostrap-demo-cnpg
+  namespace: postgresdr
+spec:
+  instances: 3
+  storage:
+    storageClass: local-path
+    size: 10Gi
+  bootstrap:
+    recovery:
+     source: dc-cluster
+  externalClusters:
+    # By default the recovery method strictly uses the name of the cluster in the externalClusters section
+    # to locate the main folder of the backup data within the object store, which is normally reserved for
+    # the name of the server. You can specify a different one with the barmanObjectStore.serverName property
+    # (by default assigned to the value of name in the external cluster definition).
+    - name: dc-cluster
+      barmanObjectStore:
+        endpointURL: "http://minio-s3.minio.svc.cluster.local:9000"
+        destinationPath: "s3://dc-backups-bucket/dc-cluster" #s3://bucket, NOTE: externalClusters.name will be appended here
+        s3Credentials:
+          accessKeyId:
+            name: helm-dc-cluster-backup-s3-creds
+            key: SECRET_ACCESS_KEY
+          secretAccessKey:
+            name: helm-dc-cluster-backup-s3-creds
+            key: ACCESS_SECRET_KEY
+        wal:
+          maxParallel: 8
