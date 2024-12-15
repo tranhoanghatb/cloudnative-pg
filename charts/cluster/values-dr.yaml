@@ -49,7 +49,7 @@ recovery:
   # -- Overrides the provider specific default endpoint. Defaults to:
   # S3: https://s3.<region>.amazonaws.com"
   # Leave empty if using the default S3 endpoint
-  endpointURL: "https://minio-dc.k8s.local"
+  endpointURL: "http://minio-s3.minio.svc.cluster.local:9000"
   # -- Specifies a CA bundle to validate a privately signed certificate.
   endpointCA:
     create: false
@@ -64,7 +64,7 @@ recovery:
   provider: s3
   s3:
     region: ""
-    endpoint: "https://minio-dc.k8s.local"
+    endpoint: "http://minio-s3.minio.svc.cluster.local:9000"
     bucket: "s3://dc-backups-bucket"  # The bucket name
     path: "dc-cluster"  # Path to backups inside the bucket
     accessKey: "console"   # Add the access key directly
