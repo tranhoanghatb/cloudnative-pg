@@ -1,9 +1,8 @@
-
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: cluster-example-initdb
-  namespace: postgres3
+  name: pgcluster-dc
+  namespace: dc
 spec:
   instances: 3
 

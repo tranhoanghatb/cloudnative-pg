@@ -297,7 +297,7 @@ backups:
   enabled: true
 
   volumeSnapshot:
-    className: rook-ceph-block  # Replace with your VolumeSnapshotClass name
+    className: csi-cephfsplugin-snapclass  # Replace with your VolumeSnapshotClass name
   #   labels:                     # Optional labels for the snapshot
   #     environment: production
   #   annotations:                # Optional annotations for the snapshot
@@ -383,6 +383,7 @@ backups:
       backupOwnerReference: self
       # -- Backup method, can be `barmanObjectStore` (default) or `volumeSnapshot`
       method: volumeSnapshot
+      className: csi-cephfsplugin-snapclass
 
   # -- Retention policy for backups
   retentionPolicy: "30d"

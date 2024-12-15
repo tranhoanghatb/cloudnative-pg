@@ -1,109 +1,3 @@
-# ---
-# apiVersion: ceph.rook.io/v1
-# kind: CephObjectStore
-# metadata:
-#   name: pg-backup
-#   namespace: rook-ceph
-# spec:
-#   metadataPool:
-#     failureDomain: host
-#     replicated:
-#       size: 3
-#   dataPool:
-#     failureDomain: host
-#     # For production it is recommended to use more chunks, such as 4+2 or 8+4
-#     erasureCoded:
-#       dataChunks: 2
-#       codingChunks: 1
-#   preservePoolsOnDelete: true
-#   gateway:
-#     # sslCertificateRef:
-#     port: 80
-#     #securePort: 443
-#     instances: 1
-# ---
-# apiVersion: storage.k8s.io/v1
-# kind: StorageClass
-# metadata:
-#    name: dc-backups-bucket-sc
-# # Change "rook-ceph" provisioner prefix to match the operator namespace if needed
-# provisioner: rook-ceph.ceph.rook.io/bucket
-# reclaimPolicy: Delete
-# parameters:
-#   objectStoreName: pg-backup
-#   objectStoreNamespace: rook-ceph
-# ---
-# apiVersion: objectbucket.io/v1alpha1
-# kind: ObjectBucketClaim
-# metadata:
-#   name: dc-backups-bucket-claim
-# spec:
-#   generateBucketName: dc-backups-bucket
-#   storageClassName: dc-backups-bucket-sc
-# ---
-# apiVersion: ceph.rook.io/v1
-# kind: CephObjectStoreUser
-# metadata:
-#   name: dc-backup-user
-#   namespace: rook-ceph
-# spec:
-#   store: pg-backup  
-#   displayName: "Backup User for DC"
-# # ---
-# # apiVersion: v1
-# # kind: Secret
-# # metadata:
-# #   name: dc-backup-s3-credentials
-# #   namespace: rook-ceph
-# # type: Opaque
-# # data:
-# #   accessKey: EMSAHCKLI8AKHD3972RQ
-# #   secretKey: wRiLHBw01eJCWVQyQyxXukEia4ZQoNB7AvFowztd
-# #   demo: test
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: rook-ceph-rgw-pg-backup
-#   namespace: rook-ceph
-#   labels:
-#     app: rook-ceph-rgw
-#     rook_cluster: rook-ceph
-#     rook_object_store: pg-backup
-# spec:
-#   ports:
-#   - name: rgw
-#     port: 80
-#     protocol: TCP
-#     targetPort: 80
-#   selector:
-#     app: rook-ceph-rgw
-#     rook_cluster: rook-ceph
-#     rook_object_store: pg-backup
-#   sessionAffinity: None
-#   type: ClusterIP
- 
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: pg-backup-ingress
-#   namespace: rook-ceph
-#   annotations:
-#     kubernetes.io/ingress.class: "nginx"
-#     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-# spec:
-#   rules:
-#   - host: pg-backup.k8s.local
-#     http:
-#       paths:
-#       - path: /
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: rook-ceph-rgw-pg-backup  #  Service Rook Ceph Object Store
-#             port:
-#               number: 80
 ---
 apiVersion: v1
 kind: Secret
@@ -119,13 +13,13 @@ data:
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
 metadata:
-  name: rook-ceph-block
-driver: rook-ceph.rbd.csi.ceph.com # driver:namespace:operator
+  name: csi-cephfsplugin-snapclass
+driver: rook-ceph.cephfs.csi.ceph.com # csi-provisioner-name
 parameters:
   # Specify a string that identifies your cluster. Ceph CSI supports any
   # unique string. When Ceph CSI is deployed by Rook use the Rook namespace,
   # for example "rook-ceph".
   clusterID: rook-ceph # namespace:cluster
-  csi.storage.k8s.io/snapshotter-secret-name: rook-csi-rbd-provisioner
+  csi.storage.k8s.io/snapshotter-secret-name: rook-csi-cephfs-provisioner
   csi.storage.k8s.io/snapshotter-secret-namespace: rook-ceph # namespace:cluster
 deletionPolicy: Delete
