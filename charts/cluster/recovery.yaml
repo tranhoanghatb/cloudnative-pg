@@ -8,6 +8,9 @@ spec:
   storage:
     size: 1Gi
     storageClass: rook-cephfs
+  walStorage:
+    size: 1Gi
+    storageClass: rook-cephfs    
   bootstrap:
     recovery:
       volumeSnapshots:
