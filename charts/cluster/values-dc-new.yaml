@@ -296,8 +296,8 @@ backups:
   # -- You need to configure backups manually, so backups are disabled by default.
   enabled: true
 
-  # volumeSnapshot:
-  #   className: rook-ceph-block  # Replace with your VolumeSnapshotClass name
+  volumeSnapshot:
+    className: rook-ceph-block  # Replace with your VolumeSnapshotClass name
   #   labels:                     # Optional labels for the snapshot
   #     environment: production
   #   annotations:                # Optional annotations for the snapshot
