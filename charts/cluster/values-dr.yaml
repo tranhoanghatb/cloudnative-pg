@@ -51,10 +51,14 @@ recovery:
   # Leave empty if using the default S3 endpoint
   endpointURL: "http://minio-s3.minio.svc.cluster.local:9000"
   # -- Specifies a CA bundle to validate a privately signed certificate.
+
+
   # endpointCA:
   #   create: false
   #   name: "minio-ca-secret"
   #   key: "ca.crt"
+
+  
   # -- Overrides the provider specific default path. Defaults to:
   # S3: s3://<bucket><path>
   # Azure: https://<storageAccount>.<serviceName>.core.windows.net/<containerName><path>
