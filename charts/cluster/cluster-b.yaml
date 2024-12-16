@@ -39,7 +39,7 @@ spec:
     barmanObjectStore: 
       serverName: cluster-dc-a
       destinationPath: s3://backups/
-      endpointURL: http://minio-s3.minio.svc.cluster.local:9000
+      endpointURL: https://minio-dc.k8s.local
       s3Credentials:
         accessKeyId:
           name: minio
@@ -53,7 +53,7 @@ spec:
     barmanObjectStore: 
       serverName: cluster-dc-b
       destinationPath: s3://backups/
-      endpointURL: http://minio-s3.minio.svc.cluster.local:9000
+      endpointURL: https://minio-dc.k8s.local
       s3Credentials:
         accessKeyId:
           name: minio
