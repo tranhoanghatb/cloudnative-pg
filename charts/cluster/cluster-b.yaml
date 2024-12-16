@@ -40,6 +40,9 @@ spec:
       serverName: cluster-dc-a
       destinationPath: s3://backups/
       endpointURL: https://minio-dc.k8s.local
+      endpointCA:
+        name: minio-s3-ca-secret
+        key: k8s.local.crt
       s3Credentials:
         accessKeyId:
           name: minio
@@ -54,6 +57,9 @@ spec:
       serverName: cluster-dc-b
       destinationPath: s3://backups/
       endpointURL: https://minio-dc.k8s.local
+      endpointCA:
+        name: minio-s3-ca-secret
+        key: k8s.local.crt
       s3Credentials:
         accessKeyId:
           name: minio
