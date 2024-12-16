@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Backup
 metadata:
-  name: backup2
+  name: backup4
   namespace: postgres3
 spec:
   method: volumeSnapshot
