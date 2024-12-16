@@ -2,8 +2,8 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: helm-dc-cluster-backup-s3-creds
-  namespace: postgresdc
+  name: minio
+  namespace: dc
 type: Opaque
 data:
   ACCESS_KEY_ID: Y29uc29sZQ==        # Base64 encoded value for "console"
