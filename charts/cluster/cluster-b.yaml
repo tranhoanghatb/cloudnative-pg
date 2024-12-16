@@ -13,7 +13,7 @@ spec:
 
   backup:
     barmanObjectStore:
-      destinationPath: s3://backups/
+      destinationPath: s3://backups-dr/
       endpointURL: http://minio-s3.minio.svc.cluster.local:9000
       s3Credentials:
         accessKeyId:
