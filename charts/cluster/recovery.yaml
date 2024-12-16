@@ -1,8 +1,8 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: pgcluster-dr
-  namespace: postgres3
+  name: pgcluster-dr1
+  namespace: dr
 spec:
   instances: 3
   storage:
@@ -18,10 +18,13 @@ spec:
           name: backup5 # Name of the snapshot taken from primary cluster 
           kind: VolumeSnapshot
           apiGroup: snapshot.storage.k8s.io
+          namespace: postgres3
   
 
         walStorage:
           name: backup5-wal  # Name of the snapshot for the WAL (Write-Ahead Logs)
           kind: VolumeSnapshot
           apiGroup: snapshot.storage.k8s.io
+          namespace: postgres3
+  
 
