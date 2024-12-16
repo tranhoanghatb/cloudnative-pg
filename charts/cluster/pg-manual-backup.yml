@@ -1,20 +1,10 @@
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: helm-dc-cluster-backup-s3-creds
-  namespace: postgresdc
-type: Opaque
-data:
-  ACCESS_KEY_ID: Y29uc29sZQ==        # Base64 encoded value for "console"
-  ACCESS_SECRET_KEY: Y29uc29sZTEyMw== # Base64 encoded value for "console123"
----
 apiVersion: postgresql.cnpg.io/v1
 kind: Backup
 metadata:
-  name: backup6
-  namespace: postgresdc
+  name: backup-now1
+  namespace: dc
 spec:
   # method: volumeSnapshot
   cluster:
-    name: dc-cluster
+    name: cluster-dc-a
