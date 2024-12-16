@@ -64,9 +64,20 @@ apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
   name: cluster-dc-a-backup
+  namespace: dc
 spec:
   schedule: '0 0 0 * * *'
   backupOwnerReference: self
   cluster:
     name: cluster-dc-a
   immediate: true
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: minio
+  namespace: dc
+type: Opaque
+data:
+  ACCESS_KEY_ID: Y29uc29sZQ==        # Base64 encoded value for "console"
+  SECRET_ACCESS_KEY: Y29uc29sZTEyMw== # Base64 encoded value for "console123"  
