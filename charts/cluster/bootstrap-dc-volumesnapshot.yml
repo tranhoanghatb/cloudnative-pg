@@ -17,6 +17,9 @@ spec:
   storage:
     size: 1Gi
     storageClass: rook-cephfs
+  walStorage:
+    size: 1Gi
+    storageClass: rook-cephfs      
   backup:
     volumeSnapshot:
       # Thêm cấu hình cho VolumeSnapshot
