@@ -17,12 +17,11 @@ spec:
   storage:
     size: 1Gi
     storageClass: rook-cephfs
-  # walStorage:
-  #   size: 1Gi
-  #   storageClass: rook-cephfs      
+  walStorage:
+    size: 1Gi
+    storageClass: rook-cephfs      
   backup:
     volumeSnapshot:
-      # Thêm cấu hình cho VolumeSnapshot
       className: csi-cephfsplugin-snapclass
 ---
 apiVersion: postgresql.cnpg.io/v1
