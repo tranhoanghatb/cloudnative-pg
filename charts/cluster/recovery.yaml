@@ -18,8 +18,10 @@ spec:
           name: backup3 # Name of the snapshot taken from primary cluster 
           kind: VolumeSnapshot
           apiGroup: snapshot.storage.k8s.io
+          sourceNamespace: postgres3
 
         walStorage:
           name: backup3  # Name of the snapshot for the WAL (Write-Ahead Logs)
           kind: VolumeSnapshot
           apiGroup: snapshot.storage.k8s.io
+          sourceNamespace: postgres3
