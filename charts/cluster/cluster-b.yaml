@@ -1,0 +1,87 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cluster-dc-b
+  namespace: dr
+spec:
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+
+  storage:
+    storageClass: rook-cephfs
+    size: 1Gi
+
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://backups/
+      endpointURL: http://minio-s3.minio.svc.cluster.local:9000
+      s3Credentials:
+        accessKeyId:
+          name: minio
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: minio
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+
+  bootstrap:
+    recovery:
+      source: cluster-dc-a
+
+  replica:
+    self: cluster-dc-b
+    primary: cluster-dc-a
+    source: cluster-dc-a
+
+  externalClusters:
+  - name: cluster-dc-a
+    barmanObjectStore: 
+      serverName: cluster-dc-a
+      destinationPath: s3://backups/
+      endpointURL: http://minio-s3.minio.svc.cluster.local:9000
+      s3Credentials:
+        accessKeyId:
+          name: minio
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: minio
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+  - name: cluster-dc-b
+    barmanObjectStore: 
+      serverName: cluster-dc-b
+      destinationPath: s3://backups/
+      endpointURL: http://minio-s3.minio.svc.cluster.local:9000
+      s3Credentials:
+        accessKeyId:
+          name: minio
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: minio
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: cluster-dc-b-backup
+  namespace: dr
+spec:
+  schedule: '0 0 0 * * *'
+  backupOwnerReference: self
+  cluster:
+    name: cluster-dc-b
+  immediate: true
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: minio
+  namespace: dr
+type: Opaque
+data:
+  ACCESS_KEY_ID: Y29uc29sZQ==        # Base64 encoded value for "console"
+  ACCESS_SECRET_KEY: Y29uc29sZTEyMw== # Base64 encoded value for "console123"    
