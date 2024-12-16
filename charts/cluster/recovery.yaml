@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: cluster-restore
+  name: pgcluster-dr
   namespace: dc
 spec:
   instances: 3
@@ -15,7 +15,7 @@ spec:
     recovery:
       volumeSnapshots:
         storage:
-          name: backup-example  # Name of the snapshot taken from primary cluster
+          name: backup-example  # Name of the snapshot taken from primary cluster 
           kind: VolumeSnapshot
           apiGroup: snapshot.storage.k8s.io
 
