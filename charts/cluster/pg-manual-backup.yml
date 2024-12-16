@@ -2,7 +2,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Backup
 metadata:
-  name: backup-now1
+  name: backup-now2
   namespace: dc
 spec:
   # method: volumeSnapshot
