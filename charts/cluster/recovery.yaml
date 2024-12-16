@@ -2,7 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: pgcluster-dr
-  namespace: dc
+  namespace: dr
 spec:
   instances: 3
   storage:
@@ -15,15 +15,11 @@ spec:
     recovery:
       volumeSnapshots:
         storage:
-          name: backup-example  # Name of the snapshot taken from primary cluster 
+          name: backup1  # Name of the snapshot taken from primary cluster 
           kind: VolumeSnapshot
           apiGroup: snapshot.storage.k8s.io
 
         walStorage:
-          name: backup-example  # Name of the snapshot for the WAL (Write-Ahead Logs)
+          name: backup1  # Name of the snapshot for the WAL (Write-Ahead Logs)
           kind: VolumeSnapshot
           apiGroup: snapshot.storage.k8s.io
-
-  backup:
-    volumeSnapshot:
-      className: csi-cephfsplugin-snapclass  # Ensure the backup class is properly set
