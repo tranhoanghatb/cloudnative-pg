@@ -2,8 +2,8 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Backup
 metadata:
   name: backup5
-  namespace: postgres3
+  namespace: dc
 spec:
-  method: volumeSnapshot
+  # method: volumeSnapshot
   cluster:
-    name: cluster-example-initdb
+    name: cluster-dc-a
