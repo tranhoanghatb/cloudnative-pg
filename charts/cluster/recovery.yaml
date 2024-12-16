@@ -15,11 +15,11 @@ spec:
     recovery:
       volumeSnapshots:
         storage:
-          name: backup1  # Name of the snapshot taken from primary cluster 
+          name: backup3 # Name of the snapshot taken from primary cluster 
           kind: VolumeSnapshot
           apiGroup: snapshot.storage.k8s.io
 
         walStorage:
-          name: backup1  # Name of the snapshot for the WAL (Write-Ahead Logs)
+          name: backup3  # Name of the snapshot for the WAL (Write-Ahead Logs)
           kind: VolumeSnapshot
           apiGroup: snapshot.storage.k8s.io
