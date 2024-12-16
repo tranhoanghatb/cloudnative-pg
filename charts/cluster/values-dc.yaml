@@ -229,7 +229,7 @@ backups:
     region: ""
     endpoint: "http://minio-s3.minio.svc.cluster.local:9000"
     bucket: "s3://dc-backups-bucket"
-    path: "/dc-cluster"
+    path: "/"
     accessKey: "console"   # Add the access key directly
     secretKey: "console123"   # Add the secret key directly
     # sslMode: "disable"
