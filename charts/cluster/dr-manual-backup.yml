@@ -1,0 +1,9 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Backup
+metadata:
+  name: manual-backup
+  namespace: dr
+spec:
+  cluster:
+    name: cluster-dc-b
