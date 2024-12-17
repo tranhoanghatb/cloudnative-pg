@@ -8,10 +8,10 @@ spec:
   primaryUpdateStrategy: unsupervised
 
   storage:
-    storageClass: rook-cephfs
+    storageClass: ""
     size: 8Gi
   walStorage:
-    storageClass: rook-cephfs
+    storageClass: ""
     size: 8Gi
 
   monitoring:
