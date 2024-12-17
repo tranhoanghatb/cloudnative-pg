@@ -50,6 +50,7 @@ spec:
   replica:
     self: dc-pg
     primary: dc-pg
+    promotionToken: eyJsYXRlc3RDaGVja3BvaW50VGltZWxpbmVJRCI6IjIiLCJyZWRvV2FsRmlsZSI6IjAwMDAwMDAyMDAwMDAwMDAwMDAwMDAxNyIsImRhdGFiYXNlU3lzdGVtSWRlbnRpZmllciI6Ijc0NDkyNDk3Mjc4NDAyNzY1MDMiLCJsYXRlc3RDaGVja3BvaW50UkVET0xvY2F0aW9uIjoiMC8xNzAwMDAyOCIsInRpbWVPZkxhdGVzdENoZWNrcG9pbnQiOiJUdWUgMTcgRGVjIDIwMjQgMTE6MDk6NDEgQU0gVVRDIiwib3BlcmF0b3JWZXJzaW9uIjoiMS4yNC4xIn0=
     source: dr-pg
 
   externalClusters:
