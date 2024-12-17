@@ -46,7 +46,7 @@ spec:
   replica:
     self: dc-pg
     primary: dc-pg
-    source: cluster-dc-b
+    source: dr-pg
 
   externalClusters:
   - name: dc-pg
@@ -63,9 +63,9 @@ spec:
           key: ACCESS_SECRET_KEY
       wal:
         compression: gzip
-  - name: cluster-dc-b
+  - name: dr-pg
     barmanObjectStore: 
-      serverName: cluster-dc-b
+      serverName: dr-pg
       destinationPath: s3://backups/
       endpointURL: http://minio-s3.minio.svc.cluster.local:9000
       s3Credentials:

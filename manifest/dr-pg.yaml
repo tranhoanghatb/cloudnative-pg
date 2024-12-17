@@ -45,17 +45,17 @@ spec:
 
   bootstrap:
     recovery:
-      source: cluster-dc-a
+      source: dc-pg
 
   replica:
     self: dr-pg
-    primary: cluster-dc-a
-    source: cluster-dc-a
+    primary: dc-pg
+    source: dc-pg
 
   externalClusters:
-  - name: cluster-dc-a
+  - name: dc-pg
     barmanObjectStore: 
-      serverName: cluster-dc-a
+      serverName: dc-pg
       destinationPath: s3://backups/
       endpointURL: https://minio-dc.k8s.local
       endpointCA:
