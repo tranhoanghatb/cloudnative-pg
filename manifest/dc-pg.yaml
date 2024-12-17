@@ -13,7 +13,23 @@ spec:
     
   monitoring:
     enablePodMonitor: true
+    metrics:
+      - name: postgres
+        path: /metrics
+        port: 9187  # Default port for CloudNativePG's Prometheus exporter
+    extraArgs:
+      - --collect-all
+      - --collect-performance
+      - --collect-activities
 
+  # Optionally, add resource requests and limits for better monitoring of CPU and memory
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "1Gi"
   backup:
     barmanObjectStore:
       destinationPath: s3://backups/
