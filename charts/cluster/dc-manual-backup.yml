@@ -3,7 +3,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Backup
 metadata:
   name: manual-backup
-  namespace: dc
+  namespace: gds
 spec:
   cluster:
-    name: cluster-dc-a
+    name: dc-pg
