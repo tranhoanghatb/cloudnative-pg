@@ -1,0 +1,93 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: dr-pg
+  namespace: viettel
+spec:
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+
+  storage:
+    storageClass: ceph-filesystem
+    size: 1Gi
+
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://backups-dr/
+      endpointURL: http://minio-s3.minio.svc.cluster.local:9000
+      s3Credentials:
+        accessKeyId:
+          name: minio
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: minio
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+
+  bootstrap:
+    recovery:
+      source: cluster-dc-a
+
+  replica:
+    self: dr-pg
+    primary: cluster-dc-a
+    source: cluster-dc-a
+
+  externalClusters:
+  - name: cluster-dc-a
+    barmanObjectStore: 
+      serverName: cluster-dc-a
+      destinationPath: s3://backups/
+      endpointURL: https://minio-dc.k8s.local
+      endpointCA:
+        name: minio-s3-ca-secret
+        key: k8s.local.crt
+      s3Credentials:
+        accessKeyId:
+          name: minio
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: minio
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+  - name: dr-pg
+    barmanObjectStore: 
+      serverName: dr-pg
+      destinationPath: s3://backups/
+      endpointURL: https://minio-dc.k8s.local
+      endpointCA:
+        name: minio-s3-ca-secret
+        key: k8s.local.crt
+      s3Credentials:
+        accessKeyId:
+          name: minio
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: minio
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: dr-pg-backup
+  namespace: viettel
+spec:
+  schedule: '0 0 0 * * *'
+  backupOwnerReference: self
+  cluster:
+    name: dr-pg
+  immediate: true
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: minio
+  namespace: viettel
+type: Opaque
+data:
+  ACCESS_KEY_ID: Y29uc29sZQ==        
+  ACCESS_SECRET_KEY: Y29uc29sZTEyMw==    

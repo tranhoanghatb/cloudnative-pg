@@ -1,0 +1,9 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Backup
+metadata:
+  name: manual-backup
+  namespace: viettel
+spec:
+  cluster:
+    name: dr-pg

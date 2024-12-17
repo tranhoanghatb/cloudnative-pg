@@ -1,0 +1,83 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: dc-pg
+  namespace: gds
+spec:
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+
+  storage:
+    storageClass: rook-cephfs
+    size: 1Gi
+
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://backups/
+      endpointURL: http://minio-s3.minio.svc.cluster.local:9000
+      s3Credentials:
+        accessKeyId:
+          name: minio
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: minio
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+
+  replica:
+    self: dc-pg
+    primary: dc-pg
+    source: cluster-dc-b
+
+  externalClusters:
+  - name: dc-pg
+    barmanObjectStore: 
+      serverName: dc-pg
+      destinationPath: s3://backups/
+      endpointURL: http://minio-s3.minio.svc.cluster.local:9000
+      s3Credentials:
+        accessKeyId:
+          name: minio
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: minio
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+  - name: cluster-dc-b
+    barmanObjectStore: 
+      serverName: cluster-dc-b
+      destinationPath: s3://backups/
+      endpointURL: http://minio-s3.minio.svc.cluster.local:9000
+      s3Credentials:
+        accessKeyId:
+          name: minio
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: minio
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: dc-pg-backup
+  namespace: gds
+spec:
+  schedule: '0 0 0 * * *'
+  backupOwnerReference: self
+  cluster:
+    name: dc-pg
+  immediate: true
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: minio
+  namespace: gds
+type: Opaque
+data:
+  ACCESS_KEY_ID: Y29uc29sZQ==        
+  ACCESS_SECRET_KEY: Y29uc29sZTEyMw==
