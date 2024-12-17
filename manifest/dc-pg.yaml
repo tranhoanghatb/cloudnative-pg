@@ -81,26 +81,42 @@ spec:
           key: ACCESS_SECRET_KEY
       wal:
         compression: gzip
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: pg-dc-ingress
+#   namespace: gds
+#   annotations:
+#     nginx.ingress.kubernetes.io/backend-protocol: "TCP"
+# spec:
+#   rules:
+#   - host: pg-dc.k8s.local
+#     http:
+#       paths:
+#       - path: /
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: dc-pg-rw
+#             port:
+#               number: 5432
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: v1
+kind: Service
 metadata:
-  name: pg-dc-ingress
+  name: dc-pg-rw-loadbalancer
   namespace: gds
-  annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "TCP"
 spec:
-  rules:
-  - host: pg-dc.k8s.local
-    http:
-      paths:
-      - path: /
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: dc-pg-rw
-            port:
-              number: 5432
+  selector:
+    cnpg.io/cluster: dc-pg
+    cnpg.io/instanceRole: primary
+  ports:
+    - name: postgres
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: LoadBalancer
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
