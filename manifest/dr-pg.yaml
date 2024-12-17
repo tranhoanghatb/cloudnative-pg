@@ -8,10 +8,8 @@ spec:
   primaryUpdateStrategy: unsupervised
 
   storage:
-    storageClass: ""
     size: 8Gi
   walStorage:
-    storageClass: ""
     size: 8Gi
 
   monitoring:
