@@ -17,11 +17,11 @@ spec:
   # Optionally, add resource requests and limits for better monitoring of CPU and memory
   resources:
     requests:
-      cpu: "100m"
-      memory: "256Mi"
-    limits:
-      cpu: "500m"
+      cpu: "2000m"
       memory: "1Gi"
+    limits:
+      cpu: "4000m"
+      memory: "4Gi"
   backup:
     barmanObjectStore:
       destinationPath: s3://backups/
