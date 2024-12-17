@@ -11,6 +11,19 @@ spec:
     size: 8Gi
   walStorage:
     size: 8Gi
+  
+  config:
+    # Thêm các tham số vào postgresql.conf
+    postgresql.conf:
+      listen_addresses: "*"
+    
+    # Thêm cấu hình cho pg_hba.conf
+    pgHba:
+      - type: host
+        database: all
+        user: all
+        address: 0.0.0.0/0
+        method: md5
 
   monitoring:
     enablePodMonitor: true
