@@ -57,7 +57,7 @@ spec:
     barmanObjectStore: 
       serverName: dc-pg
       destinationPath: s3://backups/
-      endpointURL: https://minio-dc.k8s.local
+      endpointURL: https://minio-dr.k8s.local
       endpointCA:
         name: minio-s3-ca-secret
         key: k8s.local.crt
@@ -74,7 +74,7 @@ spec:
     barmanObjectStore: 
       serverName: dr-pg
       destinationPath: s3://backups/
-      endpointURL: https://minio-dc.k8s.local
+      endpointURL: https://minio-dr.k8s.local
       endpointCA:
         name: minio-s3-ca-secret
         key: k8s.local.crt
