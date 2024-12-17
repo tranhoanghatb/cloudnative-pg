@@ -49,7 +49,7 @@ spec:
 
   replica:
     self: dr-pg
-    primary: dc-pg
+    primary: dr-pg
     source: dc-pg
 
   externalClusters:
