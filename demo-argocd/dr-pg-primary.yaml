@@ -87,7 +87,7 @@ spec:
         compression: gzip
   postgresql:
     parameters:
-      max_connections: "500"
+      max_connections: "400"
       archive_mode: "on"
       archive_timeout: 5min
       dynamic_shared_memory_type: posix
