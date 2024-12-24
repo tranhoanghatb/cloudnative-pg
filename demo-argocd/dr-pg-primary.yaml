@@ -43,10 +43,6 @@ spec:
       wal:
         compression: gzip
 
-  bootstrap:
-    recovery:
-      source: dc-pg
-
   replica:
     self: dr-pg
     primary: dr-pg
